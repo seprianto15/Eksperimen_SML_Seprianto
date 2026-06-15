@@ -337,6 +337,17 @@ def main():
     print("         FINAL DATAFRAME DETAILED STRUCTURE:         ")
     print("=" * 100)
     print(final_df.info(max_cols=200))
+
+    # 8. Save to CSV
+    path_data = '../preprocessing/final_data_students.csv'
+
+    if final_df is not None:
+        try:
+            final_df.to_csv(path_data, index=False)
+            print(f'\n Data successfully saved to: {path_data}')
+        
+        except Exception as e:
+            print(f"\n[ERROR] Failed to save data to {path_data}. Reason: {e}")
     
 
 if __name__ == "__main__":
