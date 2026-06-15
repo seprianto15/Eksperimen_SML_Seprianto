@@ -305,28 +305,28 @@ def main():
     print("     DATA LOADING COMPLETED      ")
     print("\n" + "=" * 100)
 
+    # 2. Split all_data into numerical_features and categorical_features
+   
+    num_features = get_numerical_features(all_data)
+    cat_features = get_categorical_features(all_data)
+
+    # 3. Process Clean Outliers on Numerical Columns
     print("\n" + "=" * 100)
     print("        STARTING PREPROCESSING DATA       ")
     print("=" * 100)
 
-    # 2. Split all_data into numerical_features and categorical_features
-    num_features = get_numerical_features(all_data)
-    cat_features = get_categorical_features(all_data)
-
-
-    # 2. Process Clean Outliers on Numerical Columns
     clean_data = clean_outlier(all_data, numerical_features=num_features)
 
-    # 3. Standarize numerical features
+    # 4. Standarize numerical features
     standarize_num = standardize_numerical_features(clean_data, numerical_features=num_features)
 
-    # 4. Numerically Encode Target Label 'Status'
+    # 5. Numerically Encode Target Label 'Status'
     col_status = encode_status(standarize_num)
 
-    # 5. Bining categorical features
+    # 6. Bining categorical features
     bin_cat = binning_categorical_features(col_status, categorical_features=cat_features)
 
-    # 6. Apply One-Hot Encoding to Transformed Categorical Features
+    # 7. Apply One-Hot Encoding to Transformed Categorical Features
     final_df = one_hot_categorical(bin_cat, categorical_features=cat_features)
     
     print("\n" + "=" * 100)
