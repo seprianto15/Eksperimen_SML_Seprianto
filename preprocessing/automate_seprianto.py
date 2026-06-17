@@ -326,7 +326,7 @@ def main():
     # 6. Bining categorical features
     bin_cat = binning_categorical_features(col_status, categorical_features=cat_features)
 
-    # 7. Apply One-Hot Encoding to Transformed Categorical Features
+     # 7. Apply One-Hot Encoding to Transformed Categorical Features
     final_df = one_hot_categorical(bin_cat, categorical_features=cat_features)
     
     print("\n" + "=" * 100)
@@ -348,7 +348,7 @@ def main():
         
         except Exception as e:
             print(f"\n[ERROR] Failed to save data to {path_data}. Reason: {e}")
-    
+
 
 
 if __name__ == "__main__":

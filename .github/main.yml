@@ -1,0 +1,54 @@
+name: Automated Preprocessing
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  CSV_URL: '../data/data_student.csv'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out repository under $GITHUB_WORKSPACE
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Setup Python 3.13
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+      
+      # Check Env Variables
+      - name: Check Env
+        run: |
+          echo $CSV-URL
+      
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas numpy scikit-learn
+      
+      # Run script preprocessing
+      - name: Script preprocessing
+        run: |
+          cd preprocessing
+          python automate_seprianto.py
+
+      # Commit preprocessing data
+      - name: Commit preprocessing data
+        run: |
+          git config --global user.name ${{ secrets.username }}
+          git config --global user.email ${{ secrets.email }}
+          git add preprocessing/final_data_students.csv
+          git commit -m 'Save preprocessing data from CI run'
+          git push
+
