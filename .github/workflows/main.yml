@@ -18,18 +18,18 @@ jobs:
     steps:
       # Checks-out repository under $GITHUB_WORKSPACE
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Setup Python 3.13
       - name: Set up Python 3.13
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.13'
       
       # Check Env Variables
       - name: Check Env
         run: |
-          echo $CSV-URL
+          echo 'CSV URL is ${{ env.CSV_URL }}'
       
       # Install dependencies
       - name: Install dependencies
